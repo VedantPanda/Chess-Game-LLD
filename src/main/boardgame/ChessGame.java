@@ -18,7 +18,7 @@ public class ChessGame implements BoardGames {
     private final Deque<Player> players;
 
     public ChessGame() {
-        chessBoard = new ChessBoard(8);
+        chessBoard = ChessBoard.getChessBoardInstance(8);
         players = new LinkedList<>();
         Player blackPlayer = new Player("Alex", PieceColor.BLACK, new HumanPlayerStrategy());
         Player whitePlayer = new Player("Michael", PieceColor.WHITE, new HumanPlayerStrategy());

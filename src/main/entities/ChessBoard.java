@@ -8,10 +8,23 @@ public class ChessBoard {
 
     private final int size;
 
-    public ChessBoard(int size) {
+    private static volatile ChessBoard chessBoardInstance;
+
+    private ChessBoard(int size) {
         this.size = size;
         chessBoard = new Piece[size][size];
         initializeChessBoard();
+    }
+
+    public static ChessBoard getChessBoardInstance(int size) {
+        if(chessBoardInstance==null) {
+            synchronized (ChessBoard.class) {
+                if(chessBoardInstance==null) {
+                    chessBoardInstance = new ChessBoard(size);
+                }
+            }
+        }
+        return chessBoardInstance;
     }
 
     private void initializeChessBoard() {
